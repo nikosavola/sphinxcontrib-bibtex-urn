@@ -107,7 +107,7 @@ repos:
       - id: shellcheck
         priority: 10
   - repo: https://github.com/lovesegfault/beautysh
-    rev: v6.4.2
+    rev: v6.4.3
     hooks:
       - id: beautysh
         priority: 10
