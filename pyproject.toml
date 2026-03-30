@@ -1,5 +1,5 @@
 [project]
-name = "sphinxcontrib-urn"
+name = "sphinxcontrib-bibtex-urn"
 version = "0.1.0"
 description = "Sphinx/pybtex plugin for Finnish URN identifier support in bibliographies"
 readme = "README.md"
