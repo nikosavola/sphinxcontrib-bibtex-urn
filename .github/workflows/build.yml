@@ -1,0 +1,25 @@
+name: Build
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  merge_group:
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
+      - uses: astral-sh/setup-uv@v7
+      - run: just build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
+          compression-level: 9
+          if-no-files-found: error
