@@ -1,0 +1,26 @@
+# Configuration for GitHub Actions PR Labeler
+# https://github.com/actions/labeler
+documentation:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: '*.md'
+          - any-glob-to-any-file: 'LICENSE'
+python:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: 'sphinxcontrib_urn/**/*'
+tests:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: 'tests/**/*'
+ci:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: '.github/**/*'
+          - any-glob-to-any-file: '.pre-commit-config.yaml'
+          - any-glob-to-any-file: 'justfile'
+dependencies:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: 'pyproject.toml'
+          - any-glob-to-any-file: 'uv.lock'
