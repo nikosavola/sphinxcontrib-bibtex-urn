@@ -1,0 +1,144 @@
+[project]
+name = "sphinxcontrib-urn"
+version = "0.1.0"
+description = "Sphinx/pybtex plugin for Finnish URN identifier support in bibliographies"
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+authors = [{ name = "Niko Savola" }]
+keywords = ["bibliography", "bibtex", "pybtex", "sphinx", "urn"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Plugins",
+  "Framework :: Sphinx",
+  "Framework :: Sphinx :: Extension",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Documentation :: Sphinx",
+  "Topic :: Text Processing :: Markup :: LaTeX",
+  "Typing :: Typed",
+]
+dependencies = ["pybtex>=0.24", "sphinx>=5.0", "sphinxcontrib-bibtex>=2.5"]
+
+[dependency-groups]
+dev = [{ include-group = "lint" }, { include-group = "test" }]
+docs = [
+  "myst-parser",
+  "shibuya",
+  "sphinx",
+  "sphinx-autoapi",
+  "sphinx-autodoc-typehints",
+  "sphinx-copybutton",
+  "sphinxcontrib-mermaid",
+]
+github = ["genbadge[coverage]", "pytest-github-actions-annotate-failures"]
+lint = ["prek"]
+test = ["hypothesis", "pytest>=9.0.0", "pytest-cov", "pytest-xdist"]
+
+[build-system]
+requires = ["uv_build>=0.10.8,<0.11.0"]
+build-backend = "uv_build"
+
+[project.entry-points."pybtex.style.formatting"]
+urn_plain = "sphinxcontrib_urn.styles:PlainUrn"
+urn_unsrt = "sphinxcontrib_urn.styles:UnsrtUrn"
+urn_alpha = "sphinxcontrib_urn.styles:AlphaUrn"
+urn_unsrtalpha = "sphinxcontrib_urn.styles:UnsrtAlphaUrn"
+
+[tool.codespell]
+ignore-words-list = "astroid"
+
+[tool.coverage.run]
+source = ["sphinxcontrib_urn"]
+
+[tool.interrogate]
+docstring-style = "google"
+exclude = ["tests", "sphinxcontrib_urn/**/__init__.py"]
+ext = []
+fail-under = 100
+ignore-nested-classes = true
+ignore-nested-functions = true
+ignore-regex = ["^test_.*"]
+omit-covered-files = true
+verbose = 2
+
+[tool.pyrefly]
+project-excludes = ["**/__pycache__", "**/.*", "docs/**", ".venv/**"]
+project-includes = ["**/*.py"]
+
+[tool.pyrefly.errors]
+bad-argument-type = "ignore"
+missing-argument = "ignore"
+missing-module-attribute = "ignore"
+no-matching-overload = "ignore"
+not-a-type = "warn"
+read-only = "ignore"
+
+[tool.pytest.ini_options]
+addopts = ["--tb=short"]
+python_files = ["sphinxcontrib_urn/*.py", "test_*.py"]
+testpaths = ["sphinxcontrib_urn/", "."]
+
+[tool.ruff]
+fix = true
+
+[tool.ruff.lint]
+ignore = ["B008", "C901", "B905", "RUF001", "RUF003"]
+select = [
+  "E",  # pycodestyle errors
+  "W",  # pycodestyle warnings
+  "F",  # pyflakes
+  "I",  # isort
+  "C4",  # flake8-comprehensions
+  "B",  # flake8-bugbear
+  "D",  # pydocstyle
+  "UP",  # pyupgrade
+  "T10",  # flake8-debugger
+  "S",  # flake8-bandit
+  "PT",  # flake8-pytest-style
+  "SIM",  # flake8-simplify
+  "RET",  # flake8-return
+  "RSE",  # flake8-raise
+  "Q",  # flake8-quotes
+  "SLOT",  # flake8-slots
+  "ARG",  # flake8-unused-arguments
+  "PTH",  # flake8-use-pathlib
+  "PD",  # pandas-vet
+  "FLY",  # flynt
+  "NPY",  # numpy
+  "PERF",  # perflint
+  "RUF",  # ruff
+  "PL",  # pylint
+  "N",  # pep8-naming
+  "A",  # flake8-builtins
+  "TRY",  # tryceratops
+  "T20",  # flake8-print
+  "ISC",  # flake8-implicit-str-concat
+  "ERA",  # eradicate
+  "FURB",  # refurb
+  "DOC",  # pydoclint
+  "ASYNC",  # flake8-async
+  "TID",  # flake8-tidy-imports
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = ["S101", "D102", "D103"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.uv]
+default-groups = ["dev", "docs", "lint", "test"]
+
+[tool.uv.build-backend]
+module-root = ""
+source-exclude = ["test_*.py", "docs/**"]
