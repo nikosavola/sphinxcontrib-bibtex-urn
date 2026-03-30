@@ -102,4 +102,5 @@ so it works with *any* pybtex formatting style, including third-party ones.
 
 ## Development
 
-For information on how to set up the development environment, run tests, and contribute to the project, please see [CONTRIBUTING.md](CONTRIBUTING.md).
+For information on how to set up the development environment, run tests, and contribute to the project, please see
+[CONTRIBUTING.md](CONTRIBUTING.md).
