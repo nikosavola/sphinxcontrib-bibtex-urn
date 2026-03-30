@@ -92,7 +92,7 @@ preview = true
 docstring-code-format = true
 
 [tool.ruff.lint]
-ignore = ["B008", "C901", "B905", "RUF001", "RUF003"]
+ignore = ["B008", "C901", "B905", "RUF001", "RUF003", "RUF067"]
 select = [
   "E",  # pycodestyle errors
   "W",  # pycodestyle warnings
