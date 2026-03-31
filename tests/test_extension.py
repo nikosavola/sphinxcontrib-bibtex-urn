@@ -66,6 +66,22 @@ class TestPatchStyle:
 
     @patch("sphinxcontrib_bibtex_urn.find_plugin")
     @patch("sphinxcontrib_bibtex_urn.register_plugin")
+    def test_patch_style_default_fallback(
+        self, mock_register: MagicMock, mock_find: MagicMock
+    ) -> None:
+        """Happy Path: Uses 'unsrt' as default if bibtex_default_style is not set."""
+        mock_find.return_value = MockBaseStyle
+        app = MagicMock()
+        # Simulate missing attribute or None
+        del app.config.bibtex_default_style
+
+        _patch_style(app)
+
+        mock_find.assert_called_once_with("pybtex.style.formatting", "unsrt")
+        assert app.config.bibtex_default_style == "_urn_wrapped_unsrt"
+
+    @patch("sphinxcontrib_bibtex_urn.find_plugin")
+    @patch("sphinxcontrib_bibtex_urn.register_plugin")
     def test_patch_style_not_found(
         self,
         mock_register: MagicMock,
