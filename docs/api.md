@@ -1,7 +1,6 @@
 # API Reference
 
-This section documents the public API of `sphinxcontrib-bibtex-urn`, auto-generated from
-the source code.
+This section documents the public API of `sphinxcontrib-bibtex-urn`, auto-generated from the source code.
 
 ```{toctree}
 :hidden:
