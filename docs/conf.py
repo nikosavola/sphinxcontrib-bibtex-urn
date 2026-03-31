@@ -1,9 +1,14 @@
 """Sphinx configuration for sphinxcontrib-bibtex-urn documentation."""
 
+from importlib.metadata import PackageNotFoundError, version
+
 project = "sphinxcontrib-bibtex-urn"
 copyright = "2025, Niko Savola"  # noqa: A001
 author = "Niko Savola"
-release = "0.1.0"
+try:
+    release = version("sphinxcontrib-bibtex-urn")
+except PackageNotFoundError:
+    release = "0.1.0"
 
 extensions = [
     "shibuya",
