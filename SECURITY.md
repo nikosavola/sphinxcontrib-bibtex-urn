@@ -30,4 +30,3 @@ graph TD
     D --> E[Release New Version]
     E --> F[Credit Reporter in Release Notes]
 ```
-
