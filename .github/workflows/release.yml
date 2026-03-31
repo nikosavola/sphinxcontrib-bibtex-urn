@@ -42,6 +42,8 @@ jobs:
     name: Build package
     needs: check_and_tag
     if: needs.check_and_tag.outputs.new_tag_created == 'true'
+    permissions:
+      contents: read
     uses: ./.github/workflows/build.yml
   github_release:
     name: Create GitHub Release
