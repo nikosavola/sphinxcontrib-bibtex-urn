@@ -37,6 +37,13 @@ pre-commit:
 test *args:
     uv run --dev pytest -n auto {{ args }}
 
+# --- Docs ---
+
+# Build Sphinx documentation
+[group('docs')]
+docs:
+    uv run --group docs sphinx-build -b html docs docs/_build/html
+
 # --- Build ---
 
 # Build the Python package
