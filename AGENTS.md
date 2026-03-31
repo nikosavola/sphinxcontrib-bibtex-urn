@@ -17,8 +17,8 @@ This installs all dependencies (including dev, lint, test, and docs groups) via 
 ## Required before creating a PR or a new commit
 
 1. Run pre-commit hooks: `just pre-commit`
-2. Run tests: `just test`
-3. Compile docs: `just docs`
+1. Run tests: `just test`
+1. Compile docs: `just docs`
 
 All three must pass before committing or opening a PR.
 
