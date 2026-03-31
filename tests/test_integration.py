@@ -3,13 +3,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING
 
 import pytest
 from sphinx.application import Sphinx
-
-if TYPE_CHECKING:
-    from _pytest.monkeypatch import MonkeyPatch
 
 
 @pytest.fixture
@@ -46,34 +42,28 @@ def sphinx_app(tmp_path: Path) -> Sphinx:
 
     # Create a minimal index.rst
     index_rst = src_dir / "index.rst"
-    index_rst.write_text(
-        "Test\n"
-        "====\n\n"
-        "See :cite:`test2024`.\n\n"
-        ".. bibliography::\n"
-    )
+    index_rst.write_text("Test\n====\n\nSee :cite:`test2024`.\n\n.. bibliography::\n")
 
-    app = Sphinx(
+    return Sphinx(
         srcdir=str(src_dir),
         confdir=str(conf_dir),
         outdir=str(out_dir),
         doctreedir=str(doctree_dir),
         buildername="html",
     )
-    return app
 
 
 def test_extension_integration(sphinx_app: Sphinx) -> None:
     """End-to-end test: building with the extension should succeed and apply the style."""
     # Ensure the builder-inited signal was connected and fired
     # (Sphinx constructor already initialized everything)
-    
+
     # Verify the style was patched
     assert sphinx_app.config.bibtex_default_style == "_urn_wrapped_alpha"
-    
+
     # Run the build
     sphinx_app.build()
-    
+
     # Check if the output contains the hyperlinked URN
     output_html = (Path(sphinx_app.outdir) / "index.html").read_text()
     assert "URN:NBN:fi:aalto-202305213270" in output_html

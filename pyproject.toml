@@ -149,7 +149,7 @@ select = [
 combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
-"test_*.py" = ["S101", "D102", "D103", "PLC2701", "PLR6301"]
+"test_*.py" = ["S101", "D102", "D103", "PLC2701", "PLR6301", "ARG002"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
