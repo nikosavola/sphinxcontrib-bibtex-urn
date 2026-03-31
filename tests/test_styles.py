@@ -329,6 +329,32 @@ class TestUrnStyleMixin:
         assert "https://example.com/thesis.pdf" in html
         assert "URN:NBN:fi:aalto-202305213270" in html
 
+    def test_urn_promoted_from_url(self, style: PlainUrn) -> None:
+        """Happy Path: If 'urn' is missing but 'url' is a resolver link, treat as URN."""
+        entry = _make_entry(
+            fields={"url": "https://urn.fi/URN:NBN:fi:aalto-202305213270"}
+        )
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
+        html = formatted.text.render_as("html")  # type: ignore[attr-defined]
+        # Should be formatted as a URN link, not a standard URL field.
+        # Standard URL formatting usually starts with "URL: ".
+        assert "URL: " not in html
+        assert 'href="https://urn.fi/URN:NBN:fi:aalto-202305213270"' in html
+        assert "URN:NBN:fi:aalto-202305213270" in html
+
+    def test_urn_takes_precedence_over_unrelated_url(self, style: PlainUrn) -> None:
+        """Edge Case: If 'urn' is present, it takes precedence even if 'url' is also a resolver."""
+        entry = _make_entry(
+            fields={
+                "urn": "URN:NBN:fi:aalto-202305213270",
+                "url": "https://example.com/other",
+            }
+        )
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
+        html = formatted.text.render_as("html")  # type: ignore[attr-defined]
+        assert 'href="https://urn.fi/URN:NBN:fi:aalto-202305213270"' in html
+        assert "https://example.com/other" in html
+
     def test_original_entry_not_mutated(self, style: PlainUrn) -> None:
         """Edge Case: Ensure the mixin does not mutate original pybtex Entry."""
         entry = _make_entry(

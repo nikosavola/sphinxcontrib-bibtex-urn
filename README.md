@@ -10,9 +10,8 @@ URNs in general).
 
 BibTeX entries containing a `urn` field are rendered with a hyperlinked identifier, similar to how `doi` fields work:
 
-> [Sav23]  Niko Savola. Design and modelling of long-coherence qubits using energy
-           participation ratios. Master's thesis, Aalto University, May 2023.
-           [URN:NBN:fi:aalto-202305213270](https://urn.fi/URN:NBN:fi:aalto-202305213270).
+> [Sav23] Niko Savola. Design and modelling of long-coherence qubits using energy participation ratios. Master's thesis,
+> Aalto University, May 2023. [URN:NBN:fi:aalto-202305213270](https://urn.fi/URN:NBN:fi:aalto-202305213270).
 
 where `URN:NBN:fi:aalto-202305213270` is a clickable link pointing to `https://urn.fi/URN:NBN:fi:aalto-202305213270`.
 
@@ -94,12 +93,19 @@ Add a `urn` field to your `.bib` entries. All `URN:NBN` namespaces are supported
 }
 ```
 
-The identifier is rendered as a hyperlink pointing to the appropriate national resolver or the general `nbn-resolving.org` service.
-For instance, `URN:NBN:fi:aalto-202305213270` links to `https://urn.fi/URN:NBN:fi:aalto-202305213270`.
+The identifier is rendered as a hyperlink pointing to the appropriate national resolver or the general
+`nbn-resolving.org` service. For instance, `URN:NBN:fi:aalto-202305213270` links to
+`https://urn.fi/URN:NBN:fi:aalto-202305213270`.
 
-If the entry also contains a `url` field pointing at the same resolver URL, it is automatically suppressed to avoid
-duplication. The comparison is case-insensitive (per [RFC 8141](https://datatracker.ietf.org/doc/html/rfc8141)) and
-handles both `http://` and `https://` resolver URLs.
+#### URNs in the `url` field
+
+If the `urn` field is missing, the plugin also scans the `url` field. If it contains a link to a supported URN resolver
+(e.g., `https://urn.fi/...` or `https://nbn-resolving.org/...`), it is automatically "promoted" and formatted as a
+hyperlinked URN identifier.
+
+If the entry contains both a `urn` field and a `url` field pointing at the same resolver, the redundant URL is
+automatically suppressed to avoid duplication. The comparison is case-insensitive (per
+[RFC 8141](https://datatracker.ietf.org/doc/html/rfc8141)) and handles both `http://` and `https://` resolver URLs.
 
 ## How it works
 

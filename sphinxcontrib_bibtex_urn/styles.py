@@ -45,6 +45,12 @@ _RESOLVER_PREFIXES: set[str] = {
 logger = logging.getLogger(__name__)
 
 
+def _is_resolver_url(url: str) -> bool:
+    """Check if a URL is a known URN resolver URL."""
+    url_lower = url.strip().lower()
+    return any(url_lower.startswith(p.lower()) for p in _RESOLVER_PREFIXES)
+
+
 def resolve_urn(raw: str) -> tuple[str, str] | None:
     """Return ``(url, display_text)`` for a URN value.
 
@@ -153,6 +159,14 @@ class UrnStyleMixin:
             The formatted entry with URN support.
         """
         urn_value: str | None = entry.fields.get("urn")
+
+        # If 'urn' is missing, check if 'url' is a known resolver URL.
+        # If so, treat it as the URN value for this entry.
+        if urn_value is None:
+            url_value = entry.fields.get("url")
+            if url_value and _is_resolver_url(url_value):
+                urn_value = url_value
+
         resolved = resolve_urn(urn_value) if urn_value is not None else None
 
         if resolved is not None:

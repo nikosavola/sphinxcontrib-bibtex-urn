@@ -1,10 +1,8 @@
 name: Release
-
 on:
   push:
     branches:
       - main
-
 jobs:
   check_and_tag:
     name: Check for version bump and create tag
@@ -40,13 +38,11 @@ jobs:
             git push origin "$TAG"
             echo "new_tag=true" >> "$GITHUB_OUTPUT"
           fi
-
   build:
     name: Build package
     needs: check_and_tag
     if: needs.check_and_tag.outputs.new_tag_created == 'true'
     uses: ./.github/workflows/build.yml
-
   github_release:
     name: Create GitHub Release
     needs: [check_and_tag, build]
@@ -76,7 +72,6 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   pypi_publish:
     name: Publish to PyPI
     needs: [check_and_tag, build]
@@ -86,7 +81,7 @@ jobs:
       name: pypi
       url: https://pypi.org/p/sphinxcontrib-bibtex-urn
     permissions:
-      id-token: write  # Required for OIDC trusted publishing
+      id-token: write # Required for OIDC trusted publishing
     steps:
       - name: Download distribution packages
         uses: actions/download-artifact@v4
