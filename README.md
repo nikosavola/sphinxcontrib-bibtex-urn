@@ -5,8 +5,8 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A [Sphinx](https://www.sphinx-doc.org/) plugin that extends
-[sphinxcontrib-bibtex](https://sphinxcontrib-bibtex.readthedocs.io/) with support for **Finnish URN identifiers** (and
-URNs in general).
+[sphinxcontrib-bibtex](https://sphinxcontrib-bibtex.readthedocs.io/) with support for **URN identifiers** (specifically
+National Bibliography Numbers).
 
 BibTeX entries containing a `urn` field are rendered with a hyperlinked identifier, similar to how `doi` fields work:
 
