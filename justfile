@@ -16,14 +16,14 @@ install:
 [confirm]
 [group('setup')]
 clean:
-    @rm -rf dist build *.egg-info .ruff_cache .pytest_cache htmlcov coverage.xml
+    @rm -rf dist build *.egg-info .ruff_cache .pytest_cache htmlcov coverage.xml docs/_build
 
 # --- Linting & Formatting ---
 
 # Update pre-commit hooks to the latest revisions
 [group('lint')]
 update-pre:
-    @uvx prek autoupdate -j $(( {{ cpus }} / 2 + {{ cpus }} % 2 ))
+    @uvx prek autupdate -j $(( {{ cpus }} / 2 + {{ cpus }} % 2 ))
 
 # Run all pre-commit hooks on all files
 [group('lint')]
@@ -37,12 +37,28 @@ pre-commit:
 test *args:
     uv run --dev pytest -n auto {{ args }}
 
-# --- Docs ---
+# --- Documentation ---
 
-# Build Sphinx documentation
+# Build the documentation as HTML
 [group('docs')]
-docs:
-    uv run --group docs sphinx-build -b html docs docs/_build/html
+docs: docs-html
+
+# Build the documentation as HTML
+[group('docs')]
+docs-html:
+    @uv run --group docs sphinx-build -b html docs docs/_build/html
+
+# Build the documentation as LaTeX
+[group('docs')]
+docs-latex:
+    @uv run --group docs sphinx-build -b latex docs docs/_build/latex
+
+# Build the documentation as PDF (requires LaTeX)
+[env('XINDYOPTS', '-M sphinx.xdy')]
+[group('docs')]
+[working-directory('docs/_build/latex')]
+docs-pdf: docs-latex
+    latexmk -pdfxe -interaction=nonstopmode -f -file-line-error
 
 # --- Build ---
 

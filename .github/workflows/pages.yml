@@ -1,0 +1,77 @@
+name: Docs
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-docs-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: extractions/setup-just@v2
+      - uses: astral-sh/setup-uv@v5
+      - run: just docs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: html-docs
+          path: "./docs/_build/html/"
+  build-docs-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: extractions/setup-just@v2
+      - uses: astral-sh/setup-uv@v5
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y fonts-cmu imagemagick
+          # Allow SVG to PDF conversion in ImageMagick
+          sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' /etc/ImageMagick-6/policy.xml
+      - name: Build LaTeX documentation
+        run: just docs-latex
+      - name: Compile PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          os: alpine
+          texlive_version: latest
+          root_file: sphinxcontrib-bibtex-urn.tex
+          compiler: latexmk
+          args: -pdfxe -interaction=nonstopmode -f
+          continue_on_error: true
+          working_directory: docs/_build/latex
+          extra_system_packages: ghostscript
+          xindy_parameters: -L english -C utf8 -M sphinx.xdy
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdf-docs
+          path: docs/_build/latex/sphinxcontrib-bibtex-urn.pdf
+  deploy-docs:
+    needs: [build-docs-html, build-docs-pdf]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Download HTML artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: html-docs
+          path: _site
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pdf-docs
+          path: _site
+      - name: Upload merged pages artifact
+        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
