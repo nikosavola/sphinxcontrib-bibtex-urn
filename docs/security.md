@@ -22,11 +22,11 @@ To help me understand and fix the issue, please include as much information as p
 
 ### Process
 
-<div class="mermaid">
+```{mermaid}
 graph TD
-A[Vulnerability Report Received] --> B[Acknowledge Receipt]
-B --> C[Investigate & Confirm]
-C --> D[Develop & Test Fix]
-D --> E[Release New Version]
-E --> F[Credit Reporter in Release Notes]
-</div>
+    A[Vulnerability Report Received] --> B[Acknowledge Receipt]
+    B --> C[Investigate & Confirm]
+    C --> D[Develop & Test Fix]
+    D --> E[Release New Version]
+    E --> F[Credit Reporter in Release Notes]
+```

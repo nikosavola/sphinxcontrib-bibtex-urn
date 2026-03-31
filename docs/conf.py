@@ -6,6 +6,7 @@ author = "Niko Savola"
 release = "0.1.0"
 
 extensions = [
+    "shibuya",
     "sphinxcontrib.mermaid",
     "myst_parser",
     "sphinx.ext.intersphinx",
