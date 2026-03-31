@@ -13,22 +13,22 @@ jobs:
   build-docs-html:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: extractions/setup-just@v2
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
+      - uses: astral-sh/setup-uv@v7
       - run: just docs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: html-docs
           path: "./docs/_build/html/"
   build-docs-pdf:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           lfs: true
-      - uses: extractions/setup-just@v2
-      - uses: astral-sh/setup-uv@v5
+      - uses: extractions/setup-just@v3
+      - uses: astral-sh/setup-uv@v7
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
@@ -38,7 +38,7 @@ jobs:
       - name: Build LaTeX documentation
         run: just docs-latex
       - name: Compile PDF
-        uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v4
         with:
           os: alpine
           texlive_version: latest
@@ -49,7 +49,7 @@ jobs:
           working_directory: docs/_build/latex
           extra_system_packages: ghostscript
           xindy_parameters: -L english -C utf8 -M sphinx.xdy
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: pdf-docs
           path: docs/_build/latex/sphinxcontrib-bibtex-urn.pdf
@@ -65,17 +65,17 @@ jobs:
       id-token: write
     steps:
       - name: Download HTML artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: html-docs
           path: _site
       - name: Download PDF artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: pdf-docs
           path: _site
       - name: Upload merged pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
