@@ -34,8 +34,8 @@ pre-commit:
 
 # Run tests with pytest
 [group('test')]
-test:
-    uv run --dev pytest -n auto
+test *args:
+    uv run --dev pytest -n auto {{ args }}
 
 # --- Build ---
 
