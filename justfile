@@ -58,7 +58,7 @@ docs-latex:
 [group('docs')]
 [working-directory('docs/_build/latex')]
 docs-pdf: docs-latex
-    latexmk -pdfxe -interaction=nonstopmode -f -file-line-error
+    latexmk -pdfxe -xelatex -interaction=nonstopmode -f -file-line-error
 
 # --- Build ---
 

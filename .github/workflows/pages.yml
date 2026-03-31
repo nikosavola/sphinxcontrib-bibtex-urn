@@ -41,7 +41,7 @@ jobs:
           texlive_version: latest
           root_file: sphinxcontrib-bibtex-urn.tex
           compiler: latexmk
-          args: -pdfxe -interaction=nonstopmode -f
+          args: -pdfxe -xelatex -interaction=nonstopmode -f
           continue_on_error: true
           working_directory: docs/_build/latex
           extra_system_packages: ghostscript
