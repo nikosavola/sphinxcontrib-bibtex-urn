@@ -62,7 +62,7 @@ urn_unsrtalpha = "sphinxcontrib_bibtex_urn.styles:UnsrtAlphaUrn"
 
 [tool.codespell]
 ignore-words-list = "astroid"
-skip = "bibliography.bib"
+skip = "bibliography.bib,docs/bibliography.bib"
 
 [tool.coverage.run]
 source = ["sphinxcontrib_bibtex_urn"]
