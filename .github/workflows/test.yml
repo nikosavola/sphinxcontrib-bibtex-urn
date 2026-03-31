@@ -47,7 +47,6 @@ jobs:
           path: htmlcov
   test-code-result:
     runs-on: ubuntu-latest
-    name: Test result
     needs: test-code
     if: always()
     steps:
