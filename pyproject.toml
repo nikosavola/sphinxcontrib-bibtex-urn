@@ -1,7 +1,7 @@
 [project]
 name = "sphinxcontrib-bibtex-urn"
 version = "0.1.0"
-description = "Sphinx/pybtex plugin for Finnish URN identifier support in bibliographies"
+description = "Sphinx/pybtex plugin for URN:NBN identifier support in bibliographies"
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
