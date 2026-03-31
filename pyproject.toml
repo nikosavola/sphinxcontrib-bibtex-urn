@@ -41,7 +41,14 @@ docs = [
 ]
 github = ["genbadge[coverage]", "pytest-github-actions-annotate-failures"]
 lint = ["prek"]
-test = ["hypothesis", "pytest>=9.0.0", "pytest-cov", "pytest-xdist"]
+test = [
+  "hypothesis",
+  "pycountry",
+  "pydantic",
+  "pytest>=9.0.0",
+  "pytest-cov",
+  "pytest-xdist"
+]
 
 [build-system]
 requires = ["uv_build>=0.11.2,<0.12.0"]
@@ -91,7 +98,16 @@ preview = true
 docstring-code-format = true
 
 [tool.ruff.lint]
-ignore = ["B008", "C901", "B905", "RUF001", "RUF003", "RUF067"]
+ignore = [
+  "B008",
+  "C901",
+  "B905",
+  "RUF001",
+  "RUF003",
+  "RUF067",
+  "ERA001",
+  "E501"
+]
 select = [
   "E",  # pycodestyle errors
   "W",  # pycodestyle warnings

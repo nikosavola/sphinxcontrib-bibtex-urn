@@ -10,13 +10,27 @@ URNs in general).
 
 BibTeX entries containing a `urn` field are rendered with a hyperlinked identifier, similar to how `doi` fields work:
 
-```bibtex
-[Sav23]  Niko Savola. Design and modelling of long-coherence qubits using energy
-         participation ratios. Master's thesis, Aalto University, May 2023.
-         URN:NBN:fi:aalto-202305213270.
-```
+> [Sav23]  Niko Savola. Design and modelling of long-coherence qubits using energy
+           participation ratios. Master's thesis, Aalto University, May 2023.
+           [URN:NBN:fi:aalto-202305213270](https://urn.fi/URN:NBN:fi:aalto-202305213270).
 
 where `URN:NBN:fi:aalto-202305213270` is a clickable link pointing to `https://urn.fi/URN:NBN:fi:aalto-202305213270`.
+
+## Features
+
+- **Country-specific NBNs**: Resolution for National Bibliography Numbers for:
+  - 🇦🇹 Austria ([resolver.obvsg.at](https://resolver.obvsg.at/))
+  - 🇨🇿 Czech Republic ([resolver.nkp.cz](https://resolver.nkp.cz/web/))
+  - 🇫🇮 Finland ([urn.fi](https://urn.fi/))
+  - 🇭🇷 Croatia ([urn.nsk.hr](https://urn.nsk.hr/))
+  - 🇭🇺 Hungary ([nbn.urn.hu](https://nbn.urn.hu/resolver/))
+  - 🇮🇹 Italy ([nbn.depositolegale.it](https://nbn.depositolegale.it/))
+  - 🇳🇱 Netherlands ([persistent-identifier.nl](https://www.persistent-identifier.nl/))
+  - 🇳🇴 Norway ([nb.no](https://www.nb.no/))
+  - 🇸🇪 Sweden ([urn.kb.se](https://urn.kb.se/))
+  - 🇸🇮 Slovenia ([nbn.si](https://nbn.si/))
+- **Global NBNs**: Other `URN:NBN:...` identifiers resolved via [nbn-resolving.org](https://nbn-resolving.org/).
+- **Auto-deduplication**: Automatically suppresses redundant `url` fields that point to the same URN resolver.
 
 ## Installation
 
@@ -56,10 +70,10 @@ bibtex_bibfiles = ["refs.bib"]
 
 ### BibTeX entries
 
-Add a `urn` field to your `.bib` entries. All URN namespaces resolved by the National Library of Finland are supported:
+Add a `urn` field to your `.bib` entries. All `URN:NBN` namespaces are supported:
 
 ```bibtex
-% URN:NBN – National Bibliography Number (thesis, reports, …)
+% URN:NBN:fi – Finnish National Bibliography Number
 @mastersthesis{Sav23,
   author = {Niko Savola},
   title  = {Design and modelling of long-coherence qubits using energy
@@ -70,26 +84,17 @@ Add a `urn` field to your `.bib` entries. All URN namespaces resolved by the Nat
   urn    = {URN:NBN:fi:aalto-202305213270},
 }
 
-% URN:ISBN – book identified by ISBN
+% URN:NBN:de – German National Bibliography Number
 @book{Example23,
   author    = {Author, Example},
-  title     = {An Example Book},
-  publisher = {WSOY},
+  title     = {An Example German Book},
+  publisher = {Springer},
   year      = {2023},
-  urn       = {URN:ISBN:978-951-51-7661-5},
-}
-
-% URN:ISSN – serial identified by ISSN
-@article{Serial22,
-  author  = {Writer, Serial},
-  title   = {An Example Article},
-  journal = {Example Journal},
-  year    = {2022},
-  urn     = {URN:ISSN:1234-5678},
+  urn       = {URN:NBN:de:101:1-202301011234},
 }
 ```
 
-The identifier is rendered as a hyperlink pointing to the National Library of Finland's resolver at `https://urn.fi/`.
+The identifier is rendered as a hyperlink pointing to the appropriate national resolver or the general `nbn-resolving.org` service.
 For instance, `URN:NBN:fi:aalto-202305213270` links to `https://urn.fi/URN:NBN:fi:aalto-202305213270`.
 
 If the entry also contains a `url` field pointing at the same resolver URL, it is automatically suppressed to avoid

@@ -27,9 +27,10 @@ import logging
 from pybtex.plugin import find_plugin, register_plugin
 from sphinx.application import Sphinx
 
-from .styles import UrnStyleMixin
+from .styles import UrnStyleMixin, resolve_urn
 
 __version__ = "0.1.0"
+__all__ = ["UrnStyleMixin", "resolve_urn", "setup"]
 
 logger = logging.getLogger(__name__)
 

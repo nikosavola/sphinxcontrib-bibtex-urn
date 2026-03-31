@@ -2,23 +2,49 @@
 
 from __future__ import annotations
 
+import pycountry
 import pytest
 from hypothesis import given, strategies as st
 from pybtex.database import Entry, Person
+from pydantic import HttpUrl, TypeAdapter
 
 from sphinxcontrib_bibtex_urn.styles import (
-    URN_RESOLVER_URL,
+    NBN_RESOLVERS,
     AlphaUrn,
     PlainUrn,
     UnsrtAlphaUrn,
     UnsrtUrn,
     UrnStyleMixin,
     _is_redundant_url,
-    _resolve_urn,
+    resolve_urn,
 )
 
+
+class TestNbnResolversRegistry:
+    """Validate the integrity of the NBN_RESOLVERS mapping."""
+
+    def test_country_codes_are_valid(self) -> None:
+        """All keys must be valid ISO 3166-1 alpha-2 country codes."""
+        for cc in NBN_RESOLVERS:
+            # Skip empty CC (used for general NBNs if any) or special handling
+            if not cc:
+                continue
+            assert pycountry.countries.get(alpha_2=cc.upper()) is not None
+
+    def test_resolver_urls_are_valid(self) -> None:
+        """All values must be valid HTTP/HTTPS URLs."""
+        adapter = TypeAdapter(HttpUrl)
+        for url in NBN_RESOLVERS.values():
+            # For Norway, it has query params in the base string in the dict
+            # Actually, let's check if the URL is valid.
+            # HttpUrl validation might fail on trailing query markers if not careful.
+            # Let's just validate the base part.
+            base_url = url.split("?")[0]
+            adapter.validate_python(base_url)
+
+
 # ------------------------------------------------------------------
-# _resolve_urn
+# resolve_urn
 # ------------------------------------------------------------------
 
 
@@ -28,27 +54,82 @@ class TestResolveUrn:
     @pytest.mark.parametrize(
         ("raw_input", "expected_url", "expected_display"),
         [
-            # Bare URNs
+            # Finnish (keep original example)
             (
                 "URN:NBN:fi:aalto-202305213270",
                 "https://urn.fi/URN:NBN:fi:aalto-202305213270",
                 "URN:NBN:fi:aalto-202305213270",
             ),
+            # Austria (AT)
             (
-                "URN:ISBN:978-952-60-1234-5",
-                "https://urn.fi/URN:ISBN:978-952-60-1234-5",
-                "URN:ISBN:978-952-60-1234-5",
+                "urn:nbn:at:at-ubg:3-13",
+                "https://resolver.obvsg.at/urn:nbn:at:at-ubg:3-13",
+                "urn:nbn:at:at-ubg:3-13",
             ),
+            # Czech Republic (CZ)
             (
-                "URN:ISSN:1234-5678",
-                "https://urn.fi/URN:ISSN:1234-5678",
-                "URN:ISSN:1234-5678",
+                "urn:nbn:cz:nk-004hvy",
+                "https://resolver.nkp.cz/web/urn:nbn:cz:nk-004hvy",
+                "urn:nbn:cz:nk-004hvy",
+            ),
+            # Croatia (HR)
+            (
+                "urn:nbn:hr:162:276509",
+                "https://urn.nsk.hr/urn:nbn:hr:162:276509",
+                "urn:nbn:hr:162:276509",
+            ),
+            # Hungary (HU)
+            (
+                "urn:nbn:hu-6982",
+                "https://nbn.urn.hu/resolver/urn:nbn:hu-6982",
+                "urn:nbn:hu-6982",
+            ),
+            # Italy (IT)
+            (
+                "urn:nbn:it:unifi-3903",
+                "https://nbn.depositolegale.it/urn:nbn:it:unifi-3903",
+                "urn:nbn:it:unifi-3903",
+            ),
+            # Netherlands (NL)
+            (
+                "urn:nbn:nl:ui:12-85062",
+                "https://www.persistent-identifier.nl/urn:nbn:nl:ui:12-85062",
+                "urn:nbn:nl:ui:12-85062",
+            ),
+            # Norway (NO)
+            (
+                "urn:nbn:no-nb_digibok_2009062504007",
+                "https://www.nb.no/idtjeneste/search.jsf?urn=urn:nbn:no-nb_digibok_2009062504007",
+                "urn:nbn:no-nb_digibok_2009062504007",
+            ),
+            # Sweden (SE)
+            (
+                "urn:nbn:se:uu:diva-3475",
+                "https://urn.kb.se/urn:nbn:se:uu:diva-3475",
+                "urn:nbn:se:uu:diva-3475",
+            ),
+            # Slovenia (SI - placeholder)
+            (
+                "urn:nbn:si:dummy-123",
+                "https://nbn.si/urn:nbn:si:dummy-123",
+                "urn:nbn:si:dummy-123",
+            ),
+            # General NBN (e.g. Germany)
+            (
+                "URN:NBN:de:gbv:089-3321752945-0",
+                "https://nbn-resolving.org/URN:NBN:de:gbv:089-3321752945-0",
+                "URN:NBN:de:gbv:089-3321752945-0",
             ),
             # Full URLs
             (
                 "https://urn.fi/URN:NBN:fi:aalto-202305213270",
                 "https://urn.fi/URN:NBN:fi:aalto-202305213270",
                 "URN:NBN:fi:aalto-202305213270",
+            ),
+            (
+                "https://nbn-resolving.org/URN:NBN:de:gbv:089-3321752945-0",
+                "https://nbn-resolving.org/URN:NBN:de:gbv:089-3321752945-0",
+                "URN:NBN:de:gbv:089-3321752945-0",
             ),
             (
                 "http://urn.fi/URN:NBN:fi:aalto-202305213270",
@@ -73,21 +154,31 @@ class TestResolveUrn:
         self, raw_input: str, expected_url: str, expected_display: str
     ) -> None:
         """Test URN resolution with known inputs."""
-        url, display = _resolve_urn(raw_input)
+        resolved = resolve_urn(raw_input)
+        assert resolved is not None
+        url, display = resolved
         assert url == expected_url
         assert display == expected_display
 
     @given(st.text())
     def test_resolve_urn_fuzzing(self, raw_input: str) -> None:
-        """Property-based test: _resolve_urn should never crash on any string input."""
-        url, display = _resolve_urn(raw_input)
+        """Property-based test: resolve_urn should never crash on any string input."""
+        resolved = resolve_urn(raw_input)
+        if resolved is None:
+            return
+
+        url, display = resolved
         assert isinstance(url, str)
         assert isinstance(display, str)
 
         # Invariants based on the function's logic
         stripped = raw_input.strip()
         if not stripped.lower().startswith(("http://", "https://")):
-            assert url == f"{URN_RESOLVER_URL}{stripped}"
+            stripped_lower = stripped.lower()
+            if stripped_lower.startswith("urn:nbn:"):
+                # We expect it to be one of the known ones or default
+                # Just verify it doesn't crash and follows the pattern
+                assert url.endswith(stripped)
             assert display == stripped
 
 
@@ -166,12 +257,12 @@ def _make_entry(
     default_fields = {
         "title": "Test Thesis",
         "school": "Aalto University",
-        "year": "2024",
+        "year": "2023",
     }
     if fields:
         default_fields.update(fields)
     entry = Entry(entry_type, fields=default_fields)
-    entry.persons["author"] = [Person("Andersson, Joona")]
+    entry.persons["author"] = [Person("Savola, Niko")]
     return entry
 
 
@@ -191,21 +282,21 @@ class TestUrnStyleMixin:
     def test_entry_without_urn_unchanged(self, style: PlainUrn) -> None:
         """Happy Path: Entry without URN should be formatted normally without errors."""
         entry = _make_entry()
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         rendered = _render_plain(formatted.text)
         assert "urn" not in rendered.lower() or "URN" not in rendered
 
     def test_entry_with_urn_appended(self, style: PlainUrn) -> None:
         """Happy Path: Entry with URN should have a hyperlinked URN appended."""
         entry = _make_entry(fields={"urn": "URN:NBN:fi:aalto-202305213270"})
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         rendered = _render_plain(formatted.text)
         assert "URN:NBN:fi:aalto-202305213270" in rendered
 
     def test_urn_is_hyperlinked(self, style: PlainUrn) -> None:
         """Happy Path: Verify the HTML rendering produces the correct a href."""
         entry = _make_entry(fields={"urn": "URN:NBN:fi:aalto-202305213270"})
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         # Render as HTML to verify the hyperlink is present.
         html = formatted.text.render_as("html")  # type: ignore[attr-defined]
         assert 'href="https://urn.fi/URN:NBN:fi:aalto-202305213270"' in html
@@ -219,7 +310,7 @@ class TestUrnStyleMixin:
                 "url": "https://urn.fi/URN:NBN:fi:aalto-202305213270",
             }
         )
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         html = formatted.text.render_as("html")  # type: ignore[attr-defined]
         # The full resolver URL should NOT appear as a separate URL: field.
         # It should only appear inside the URN hyperlink.
@@ -233,7 +324,7 @@ class TestUrnStyleMixin:
                 "url": "https://example.com/thesis.pdf",
             }
         )
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         html = formatted.text.render_as("html")  # type: ignore[attr-defined]
         assert "https://example.com/thesis.pdf" in html
         assert "URN:NBN:fi:aalto-202305213270" in html
@@ -247,37 +338,9 @@ class TestUrnStyleMixin:
             }
         )
         original_url = entry.fields["url"]
-        style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         # The original entry must still have its url field.
         assert entry.fields["url"] == original_url
-
-    def test_isbn_urn_hyperlinked(self, style: PlainUrn) -> None:
-        """Verify ISBN URN formats correctly."""
-        entry = _make_entry(
-            entry_type="book",
-            fields={
-                "urn": "URN:ISBN:978-951-51-7661-5",
-                "publisher": "WSOY",
-            },
-        )
-        formatted = style.format_entry("B24", entry)  # type: ignore[attr-defined]
-        html = formatted.text.render_as("html")  # type: ignore[attr-defined]
-        assert 'href="https://urn.fi/URN:ISBN:978-951-51-7661-5"' in html
-        assert "URN:ISBN:978-951-51-7661-5" in html
-
-    def test_issn_urn_hyperlinked(self, style: PlainUrn) -> None:
-        """Verify ISSN URN formats correctly."""
-        entry = _make_entry(
-            entry_type="article",
-            fields={
-                "urn": "URN:ISSN:1234-5678",
-                "journal": "Test Journal",
-                "volume": "1",
-            },
-        )
-        formatted = style.format_entry("J24", entry)  # type: ignore[attr-defined]
-        html = formatted.text.render_as("html")  # type: ignore[attr-defined]
-        assert 'href="https://urn.fi/URN:ISSN:1234-5678"' in html
 
     def test_http_url_suppressed(self, style: PlainUrn) -> None:
         """Older documents may use http:// for the resolver URL."""
@@ -287,7 +350,7 @@ class TestUrnStyleMixin:
                 "url": "http://urn.fi/URN:NBN:fi:aalto-202305213270",
             }
         )
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         rendered = _render_plain(formatted.text)
         # http URL must be gone; only the urn.fi hyperlink remains.
         assert rendered.count("urn.fi") == 0  # plain text has no href
@@ -301,7 +364,7 @@ class TestUrnStyleMixin:
                 "url": "https://urn.fi/urn:nbn:fi:aalto-202305213270",
             }
         )
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         html = formatted.text.render_as("html")  # type: ignore[attr-defined]
         # Only one hyperlink should appear (the URN one).
         assert html.count("urn.fi") == 1
@@ -328,6 +391,6 @@ class TestPrebuiltStyles:
         """Verify the pre-built class actually includes the logic."""
         style = style_cls()  # type: ignore[call-arg]
         entry = _make_entry(fields={"urn": "URN:NBN:fi:aalto-202305213270"})
-        formatted = style.format_entry("And24", entry)  # type: ignore[attr-defined]
+        formatted = style.format_entry("Sav23", entry)  # type: ignore[attr-defined]
         html = formatted.text.render_as("html")  # type: ignore[attr-defined]
         assert "URN:NBN:fi:aalto-202305213270" in html
