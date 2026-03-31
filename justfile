@@ -54,7 +54,6 @@ docs-latex:
     @uv run --group docs sphinx-build -b latex docs docs/_build/latex
 
 # Build the documentation as PDF (requires LaTeX)
-[env('XINDYOPTS', '-M sphinx.xdy')]
 [group('docs')]
 [working-directory('docs/_build/latex')]
 docs-pdf: docs-latex

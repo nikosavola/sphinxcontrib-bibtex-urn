@@ -76,7 +76,7 @@ mermaid_output_format = "raw"
 
 # -- LaTeX -------------------------------------------------------------------
 latex_engine = "xelatex"
-latex_use_xindy = True
+latex_use_xindy = False
 latex_show_pagerefs = True
 latex_show_urls = "footnote"
 latex_documents = [
@@ -95,6 +95,21 @@ latex_elements = {
     "preamble": r"""
 \ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{n}\selectfont}
 \ChTitleVar{\Huge\bfseries\scshape}
+\usepackage{newunicodechar}
+\newunicodechar{🇦}{A}
+\newunicodechar{🇹}{T}
+\newunicodechar{🇨}{C}
+\newunicodechar{🇿}{Z}
+\newunicodechar{🇫}{F}
+\newunicodechar{🇮}{I}
+\newunicodechar{🇭}{H}
+\newunicodechar{🇷}{R}
+\newunicodechar{🇺}{U}
+\newunicodechar{🇳}{N}
+\newunicodechar{🇱}{L}
+\newunicodechar{🇴}{O}
+\newunicodechar{🇸}{S}
+\newunicodechar{🇪}{E}
 """,
 }
 
