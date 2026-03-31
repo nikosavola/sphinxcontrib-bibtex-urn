@@ -65,7 +65,9 @@ def _patch_style(app: Sphinx) -> None:
 
     register_plugin("pybtex.style.formatting", wrapped_name, wrapped_style)
     app.config.bibtex_default_style = wrapped_name
-    logger.debug("sphinxcontrib_bibtex_urn: wrapped style %r -> %r", style_name, wrapped_name)
+    logger.debug(
+        "sphinxcontrib_bibtex_urn: wrapped style %r -> %r", style_name, wrapped_name
+    )
 
 
 def setup(app: Sphinx) -> dict[str, str | bool]:

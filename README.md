@@ -97,8 +97,8 @@ handles both `http://` and `https://` resolver URLs.
 ## How it works
 
 The plugin provides `UrnStyleMixin`, a pybtex style mixin that overrides `format_entry` to append a hyperlinked URN when
-the field is present. The Sphinx extension (`sphinxcontrib_bibtex_urn`) dynamically wraps your configured style at build time,
-so it works with *any* pybtex formatting style, including third-party ones.
+the field is present. The Sphinx extension (`sphinxcontrib_bibtex_urn`) dynamically wraps your configured style at build
+time, so it works with *any* pybtex formatting style, including third-party ones.
 
 ## Development
 
