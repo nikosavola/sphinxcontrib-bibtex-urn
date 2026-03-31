@@ -115,5 +115,4 @@ latex_elements = {
 
 # -- Misc --------------------------------------------------------------------
 
-suppress_warnings = ["misc.highlighting_failure"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
