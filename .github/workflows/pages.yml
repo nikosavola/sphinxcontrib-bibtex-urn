@@ -48,7 +48,6 @@ jobs:
           continue_on_error: true
           working_directory: docs/_build/latex
           extra_system_packages: ghostscript
-          xindy_parameters: -L english -C utf8 -M sphinx.xdy
       - uses: actions/upload-artifact@v7
         with:
           name: pdf-docs
