@@ -49,21 +49,21 @@ requires = ["uv_build>=0.10.8,<0.11.0"]
 build-backend = "uv_build"
 
 [project.entry-points."pybtex.style.formatting"]
-urn_plain = "sphinxcontrib_urn.styles:PlainUrn"
-urn_unsrt = "sphinxcontrib_urn.styles:UnsrtUrn"
-urn_alpha = "sphinxcontrib_urn.styles:AlphaUrn"
-urn_unsrtalpha = "sphinxcontrib_urn.styles:UnsrtAlphaUrn"
+urn_plain = "sphinxcontrib_bibtex_urn.styles:PlainUrn"
+urn_unsrt = "sphinxcontrib_bibtex_urn.styles:UnsrtUrn"
+urn_alpha = "sphinxcontrib_bibtex_urn.styles:AlphaUrn"
+urn_unsrtalpha = "sphinxcontrib_bibtex_urn.styles:UnsrtAlphaUrn"
 
 [tool.codespell]
 ignore-words-list = "astroid"
 skip = "bibliography.bib"
 
 [tool.coverage.run]
-source = ["sphinxcontrib_urn"]
+source = ["sphinxcontrib_bibtex_urn"]
 
 [tool.interrogate]
 docstring-style = "google"
-exclude = ["tests", "sphinxcontrib_urn/**/__init__.py"]
+exclude = ["tests", "sphinxcontrib_bibtex_urn/**/__init__.py"]
 ext = []
 fail-under = 100
 ignore-nested-classes = true
@@ -81,8 +81,8 @@ no-matching-overload = "ignore"
 
 [tool.pytest.ini_options]
 addopts = ["--tb=short"]
-python_files = ["sphinxcontrib_urn/*.py", "test_*.py"]
-testpaths = ["sphinxcontrib_urn/", "."]
+python_files = ["sphinxcontrib_bibtex_urn/*.py", "test_*.py"]
+testpaths = ["sphinxcontrib_bibtex_urn/", "."]
 
 [tool.ruff]
 fix = true

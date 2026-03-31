@@ -8,7 +8,7 @@ documentation:
 python:
   - any:
       - changed-files:
-          - any-glob-to-any-file: 'sphinxcontrib_urn/**/*'
+          - any-glob-to-any-file: 'sphinxcontrib_bibtex_urn/**/*'
 tests:
   - any:
       - changed-files:

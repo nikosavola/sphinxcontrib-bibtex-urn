@@ -35,7 +35,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - uses: extractions/setup-just@v3
       - name: Test with pytest
-        run: just test ${{ (github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest') && '--cov=sphinxcontrib_urn --cov-report=html --cov-report=xml' || '' }}
+        run: just test ${{ (github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest') && '--cov=sphinxcontrib_bibtex_urn --cov-report=html --cov-report=xml' || '' }}
       - name: Generate coverage badge
         if: github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
         run: uv run --group dev --group github genbadge coverage -i coverage.xml -o htmlcov/coverage.svg

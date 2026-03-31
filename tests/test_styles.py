@@ -1,4 +1,4 @@
-"""Tests for sphinxcontrib_urn styles and helpers."""
+"""Tests for sphinxcontrib_bibtex_urn styles and helpers."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import pytest
 from hypothesis import given, strategies as st
 from pybtex.database import Entry, Person
 
-from sphinxcontrib_urn.styles import (
+from sphinxcontrib_bibtex_urn.styles import (
     URN_RESOLVER_URL,
     AlphaUrn,
     PlainUrn,

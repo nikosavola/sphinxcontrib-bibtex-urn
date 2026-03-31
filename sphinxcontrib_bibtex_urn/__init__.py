@@ -2,12 +2,12 @@
 
 Usage
 -----
-Add ``"sphinxcontrib_urn"`` to the ``extensions`` list in your Sphinx
+Add ``"sphinxcontrib_bibtex_urn"`` to the ``extensions`` list in your Sphinx
 ``conf.py`` **after** ``"sphinxcontrib.bibtex"``::
 
     extensions = [
         "sphinxcontrib.bibtex",
-        "sphinxcontrib_urn",
+        "sphinxcontrib_bibtex_urn",
     ]
 
 The extension automatically wraps whatever ``bibtex_default_style`` you
@@ -46,7 +46,7 @@ def _patch_style(app: Sphinx) -> None:
         base_style = find_plugin("pybtex.style.formatting", style_name)
     except Exception:
         logger.warning(
-            "sphinxcontrib_urn: could not find pybtex style %r - "
+            "sphinxcontrib_bibtex_urn: could not find pybtex style %r - "
             "URN field support will not be available.",
             style_name,
         )
@@ -65,7 +65,7 @@ def _patch_style(app: Sphinx) -> None:
 
     register_plugin("pybtex.style.formatting", wrapped_name, wrapped_style)
     app.config.bibtex_default_style = wrapped_name
-    logger.debug("sphinxcontrib_urn: wrapped style %r -> %r", style_name, wrapped_name)
+    logger.debug("sphinxcontrib_bibtex_urn: wrapped style %r -> %r", style_name, wrapped_name)
 
 
 def setup(app: Sphinx) -> dict[str, str | bool]:

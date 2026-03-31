@@ -19,7 +19,7 @@ where `URN:NBN:fi:aalto-202305213270` is a clickable link pointing to `https://u
 ## Installation
 
 ```bash
-uv add sphinxcontrib-urn          # or: pip install sphinxcontrib-urn
+uv add sphinxcontrib-bibtex-urn          # or: pip install sphinxcontrib-bibtex-urn
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ Add the extension to your `conf.py` **after** `sphinxcontrib.bibtex`. It automat
 ```python
 extensions = [
     "sphinxcontrib.bibtex",
-    "sphinxcontrib_urn",
+    "sphinxcontrib_bibtex_urn",
 ]
 
 bibtex_default_style = "alpha"    # any pybtex style works
@@ -97,7 +97,7 @@ handles both `http://` and `https://` resolver URLs.
 ## How it works
 
 The plugin provides `UrnStyleMixin`, a pybtex style mixin that overrides `format_entry` to append a hyperlinked URN when
-the field is present. The Sphinx extension (`sphinxcontrib_urn`) dynamically wraps your configured style at build time,
+the field is present. The Sphinx extension (`sphinxcontrib_bibtex_urn`) dynamically wraps your configured style at build time,
 so it works with *any* pybtex formatting style, including third-party ones.
 
 ## Development

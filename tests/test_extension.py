@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from sphinxcontrib_urn import UrnStyleMixin, _patch_style, setup
+from sphinxcontrib_bibtex_urn import UrnStyleMixin, _patch_style, setup
 
 
 # A dummy class that looks like a Pybtex style for testing.
@@ -23,8 +23,8 @@ class MockAlreadyUrnStyle(UrnStyleMixin, MockBaseStyle):
 class TestPatchStyle:
     """Tests for the _patch_style function."""
 
-    @patch("sphinxcontrib_urn.find_plugin")
-    @patch("sphinxcontrib_urn.register_plugin")
+    @patch("sphinxcontrib_bibtex_urn.find_plugin")
+    @patch("sphinxcontrib_bibtex_urn.register_plugin")
     def test_patch_style_success(
         self, mock_register: MagicMock, mock_find: MagicMock
     ) -> None:
@@ -48,8 +48,8 @@ class TestPatchStyle:
 
         assert app.config.bibtex_default_style == "_urn_wrapped_unsrt"
 
-    @patch("sphinxcontrib_urn.find_plugin")
-    @patch("sphinxcontrib_urn.register_plugin")
+    @patch("sphinxcontrib_bibtex_urn.find_plugin")
+    @patch("sphinxcontrib_bibtex_urn.register_plugin")
     def test_patch_style_already_urn_aware(
         self, mock_register: MagicMock, mock_find: MagicMock
     ) -> None:
@@ -64,8 +64,8 @@ class TestPatchStyle:
         mock_register.assert_not_called()
         assert app.config.bibtex_default_style == "urn_plain"
 
-    @patch("sphinxcontrib_urn.find_plugin")
-    @patch("sphinxcontrib_urn.register_plugin")
+    @patch("sphinxcontrib_bibtex_urn.find_plugin")
+    @patch("sphinxcontrib_bibtex_urn.register_plugin")
     def test_patch_style_not_found(
         self,
         mock_register: MagicMock,
