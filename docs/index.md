@@ -51,5 +51,6 @@ api
 :caption: Project
 
 contributing
+code_of_conduct
 security
 ```

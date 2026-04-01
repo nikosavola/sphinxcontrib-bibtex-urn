@@ -152,4 +152,8 @@ time, so it works with *any* pybtex formatting style, including third-party ones
 ## Development
 
 For information on how to set up the development environment, run tests, and contribute to the project, please see
-[CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](docs/contributing.md).
+
+All participants are expected to follow the [Code of Conduct](docs/code_of_conduct.md).
+
+See the [Security Policy](docs/security.md) for information on how to report vulnerabilities.
