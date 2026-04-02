@@ -23,13 +23,14 @@ pre-registered pybtex styles directly::
 from __future__ import annotations
 
 import logging
+from importlib.metadata import version
 
 from pybtex.plugin import find_plugin, register_plugin
 from sphinx.application import Sphinx
 
 from .styles import UrnStyleMixin, resolve_urn
 
-__version__ = "0.1.1"
+__version__ = version("sphinxcontrib-bibtex-urn")
 __all__ = ["UrnStyleMixin", "resolve_urn", "setup"]
 
 logger = logging.getLogger(__name__)
