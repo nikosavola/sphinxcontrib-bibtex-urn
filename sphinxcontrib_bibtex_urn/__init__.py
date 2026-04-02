@@ -29,7 +29,7 @@ from sphinx.application import Sphinx
 
 from .styles import UrnStyleMixin, resolve_urn
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __all__ = ["UrnStyleMixin", "resolve_urn", "setup"]
 
 logger = logging.getLogger(__name__)
