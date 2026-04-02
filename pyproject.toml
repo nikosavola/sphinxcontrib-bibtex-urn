@@ -28,6 +28,12 @@ classifiers = [
 ]
 dependencies = ["pybtex>=0.24", "sphinx>=5.0", "sphinxcontrib-bibtex>=2.5"]
 
+[project.urls]
+Changelog = "https://github.com/nikosavola/sphinxcontrib-bibtex-urn/releases"
+Documentation = "https://nikosavola.github.io/sphinxcontrib-bibtex-urn/"
+Issues = "https://github.com/nikosavola/sphinxcontrib-bibtex-urn/issues"
+Repository = "https://github.com/nikosavola/sphinxcontrib-bibtex-urn/"
+
 [dependency-groups]
 dev = [{ include-group = "lint" }, { include-group = "test" }]
 docs = [
