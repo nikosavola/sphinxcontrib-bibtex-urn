@@ -33,16 +33,16 @@ where `URN:NBN:fi:aalto-202305213270` is a clickable link pointing to `https://u
 <!-- features-start -->
 
 - **Country-specific NBNs**: Resolution for National Bibliography Numbers for:
-  - 🇦🇹 Austria ([resolver.obvsg.at](https://resolver.obvsg.at/))
-  - 🇨🇿 Czech Republic ([resolver.nkp.cz](https://resolver.nkp.cz/web/))
-  - 🇫🇮 Finland ([urn.fi](https://urn.fi/))
-  - 🇭🇷 Croatia ([urn.nsk.hr](https://urn.nsk.hr/))
-  - 🇭🇺 Hungary ([nbn.urn.hu](https://nbn.urn.hu/resolver/))
-  - 🇮🇹 Italy ([nbn.depositolegale.it](https://nbn.depositolegale.it/))
-  - 🇳🇱 Netherlands ([persistent-identifier.nl](https://www.persistent-identifier.nl/))
-  - 🇳🇴 Norway ([nb.no](https://www.nb.no/))
-  - 🇸🇪 Sweden ([urn.kb.se](https://urn.kb.se/))
-  - 🇸🇮 Slovenia ([nbn.si](https://nbn.si/))
+  - 🇦🇹 Austria ([resolver.obvsg.at](https://resolver.obvsg.at/))
+  - 🇭🇷 Croatia ([urn.nsk.hr](https://urn.nsk.hr/))
+  - 🇨🇿 Czech Republic ([resolver.nkp.cz](https://resolver.nkp.cz/web/))
+  - 🇫🇮 Finland ([urn.fi](https://urn.fi/))
+  - 🇭🇺 Hungary ([nbn.urn.hu](https://nbn.urn.hu/resolver/))
+  - 🇮🇹 Italy ([nbn.depositolegale.it](https://nbn.depositolegale.it/))
+  - 🇳🇱 Netherlands ([persistent-identifier.nl](https://www.persistent-identifier.nl/))
+  - 🇳🇴 Norway ([nb.no](https://www.nb.no/))
+  - 🇸🇮 Slovenia ([nbn.si](https://nbn.si/))
+  - 🇸🇪 Sweden ([urn.kb.se](https://urn.kb.se/))
 - **Global NBNs**: Other `URN:NBN:...` identifiers resolved via [nbn-resolving.org](https://nbn-resolving.org/).
 - **Auto-deduplication**: Automatically suppresses redundant `url` fields that point to the same URN resolver.
 - **Any pybtex style**: Works with all built-in and third-party pybtex formatting styles.
