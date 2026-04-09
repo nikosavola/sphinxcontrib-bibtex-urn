@@ -23,7 +23,7 @@ clean:
 # Update pre-commit hooks to the latest revisions
 [group('lint')]
 update-pre:
-    @uvx prek autupdate -j $(( {{ cpus }} / 2 + {{ cpus }} % 2 ))
+    @uvx prek autoupdate -j $(( {{ cpus }} / 2 + {{ cpus }} % 2 ))
 
 # Run all pre-commit hooks on all files
 [group('lint')]
