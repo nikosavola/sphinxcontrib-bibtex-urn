@@ -12,8 +12,10 @@ repos:
         exclude: uv.lock
       - id: end-of-file-fixer
         priority: 30
+        exclude: uv.lock
       - id: trailing-whitespace
         priority: 40
+        exclude: uv.lock
       - id: detect-private-key
         priority: 10
   - repo: https://github.com/codespell-project/codespell
@@ -21,6 +23,7 @@ repos:
     hooks:
       - id: codespell
         priority: 10
+        exclude: uv.lock
         additional_dependencies:
           - tomli
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -99,8 +102,10 @@ repos:
     hooks:
       - id: tombi-format
         priority: 10
+        exclude: uv.lock
       - id: tombi-lint
         priority: 20
+        exclude: uv.lock
   - repo: https://github.com/econchick/interrogate
     rev: 1.7.0
     hooks:
