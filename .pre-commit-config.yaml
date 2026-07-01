@@ -98,7 +98,7 @@ repos:
           - mdformat-frontmatter
           - mdformat-footnote
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v0.9.16
+    rev: v1.1.5
     hooks:
       - id: tombi-format
         priority: 10
