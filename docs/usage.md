@@ -26,12 +26,21 @@ including third-party ones.
 
 ### Available pre-built styles
 
-| Style name       | Base style   |
-| ---------------- | ------------ |
-| `urn_plain`      | `plain`      |
-| `urn_unsrt`      | `unsrt`      |
-| `urn_alpha`      | `alpha`      |
-| `urn_unsrtalpha` | `unsrtalpha` |
+```{list-table}
+:header-rows: 1
+:widths: 1 1
+
+* - Style name
+  - Base style
+* - `urn_plain`
+  - `plain`
+* - `urn_unsrt`
+  - `unsrt`
+* - `urn_alpha`
+  - `alpha`
+* - `urn_unsrtalpha`
+  - `unsrtalpha`
+```
 
 ## BibTeX entries
 
@@ -45,19 +54,35 @@ The identifier is rendered as a hyperlink pointing to the appropriate national r
 
 ## Supported resolvers
 
-| Country        | Resolver                                                          |
-| -------------- | ----------------------------------------------------------------- |
-| Austria        | [resolver.obvsg.at](https://resolver.obvsg.at/)                   |
-| Czech Republic | [resolver.nkp.cz](https://resolver.nkp.cz/web/)                   |
-| Finland        | [urn.fi](https://urn.fi/)                                         |
-| Croatia        | [urn.nsk.hr](https://urn.nsk.hr/)                                 |
-| Hungary        | [nbn.urn.hu](https://nbn.urn.hu/resolver/)                        |
-| Italy          | [nbn.depositolegale.it](https://nbn.depositolegale.it/)           |
-| Netherlands    | [persistent-identifier.nl](https://www.persistent-identifier.nl/) |
-| Norway         | [nb.no](https://www.nb.no/idtjeneste/search.jsf?urn=)             |
-| Sweden         | [urn.kb.se](https://urn.kb.se/)                                   |
-| Slovenia       | [nbn.si](https://nbn.si/)                                         |
-| Other          | [nbn-resolving.org](https://nbn-resolving.org/) (fallback)        |
+```{list-table}
+:header-rows: 1
+:widths: 1 3
+
+* - Country
+  - Resolver
+* - Austria
+  - [resolver.obvsg.at](https://resolver.obvsg.at/)
+* - Czech Republic
+  - [resolver.nkp.cz](https://resolver.nkp.cz/web/)
+* - Finland
+  - [urn.fi](https://urn.fi/)
+* - Croatia
+  - [urn.nsk.hr](https://urn.nsk.hr/)
+* - Hungary
+  - [nbn.urn.hu](https://nbn.urn.hu/resolver/)
+* - Italy
+  - [nbn.depositolegale.it](https://nbn.depositolegale.it/)
+* - Netherlands
+  - [persistent-identifier.nl](https://www.persistent-identifier.nl/)
+* - Norway
+  - [nb.no](https://www.nb.no/idtjeneste/search.jsf?urn=)
+* - Sweden
+  - [urn.kb.se](https://urn.kb.se/)
+* - Slovenia
+  - [nbn.si](https://nbn.si/)
+* - Other
+  - [nbn-resolving.org](https://nbn-resolving.org/) (fallback)
+```
 
 ## URNs in the `url` field
 

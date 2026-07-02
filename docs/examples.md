@@ -34,12 +34,26 @@ other entries show a clickable URN link.
 
 In addition to the two styles shown above, the following pre-built styles are available:
 
-| Style name       | Base style   | Description                               |
-| ---------------- | ------------ | ----------------------------------------- |
-| `urn_alpha`      | `alpha`      | Author-year labels, sorted alphabetically |
-| `urn_plain`      | `plain`      | Numbered labels, sorted alphabetically    |
-| `urn_unsrt`      | `unsrt`      | Numbered labels, in citation order        |
-| `urn_unsrtalpha` | `unsrtalpha` | Author-year labels, in citation order     |
+```{list-table}
+:header-rows: 1
+:widths: 1 1 2
+
+* - Style name
+  - Base style
+  - Description
+* - `urn_alpha`
+  - `alpha`
+  - Author-year labels, sorted alphabetically
+* - `urn_plain`
+  - `plain`
+  - Numbered labels, sorted alphabetically
+* - `urn_unsrt`
+  - `unsrt`
+  - Numbered labels, in citation order
+* - `urn_unsrtalpha`
+  - `unsrtalpha`
+  - Author-year labels, in citation order
+```
 
 All styles append a hyperlinked URN identifier to entries that have a `urn` field. When using the Sphinx extension,
 *any* pybtex style (including third-party ones) is automatically wrapped with URN support.
