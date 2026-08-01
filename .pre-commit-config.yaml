@@ -68,7 +68,7 @@ repos:
         pass_filenames: true
         args: ["--ignore", "missing-import"]
   - repo: https://github.com/LilSpazJoekp/docstrfmt
-    rev: v2.0.2
+    rev: v2.2.0
     hooks:
       - id: docstrfmt
         priority: 20
