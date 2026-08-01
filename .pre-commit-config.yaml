@@ -55,7 +55,7 @@ repos:
       - id: actionlint
         priority: 10
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: v1.24.1
+    rev: v1.28.0
     hooks:
       - id: zizmor
         priority: 10
