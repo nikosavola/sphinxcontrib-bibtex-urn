@@ -27,7 +27,7 @@ repos:
         additional_dependencies:
           - tomli
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.19
+    rev: v0.16.0
     hooks:
       - id: ruff
         priority: 10
