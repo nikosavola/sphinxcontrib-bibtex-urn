@@ -7,11 +7,11 @@ on:
     branches:
       - main
   workflow_dispatch:
-permissions:
-  contents: read
 jobs:
   build-docs-html:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
@@ -25,6 +25,8 @@ jobs:
           path: "./docs/_build/html/"
   build-docs-pdf:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
@@ -63,6 +65,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     permissions:
+      contents: read
       pages: write
       id-token: write
     steps:
