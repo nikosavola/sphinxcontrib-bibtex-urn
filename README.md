@@ -2,6 +2,7 @@
 
 [![Test Status](https://github.com/nikosavola/sphinxcontrib-bibtex-urn/actions/workflows/test.yml/badge.svg)](https://github.com/nikosavola/sphinxcontrib-bibtex-urn/actions/workflows/test.yml)
 [![Build Status](https://github.com/nikosavola/sphinxcontrib-bibtex-urn/actions/workflows/build.yml/badge.svg)](https://github.com/nikosavola/sphinxcontrib-bibtex-urn/actions/workflows/build.yml)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=nikosavola_sphinxcontrib-bibtex-urn&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nikosavola_sphinxcontrib-bibtex-urn)
 [![HTML Docs](https://img.shields.io/badge/%F0%9F%93%84_HTML-Docs-blue?style=flat)](https://nikosavola.github.io/sphinxcontrib-bibtex-urn/)
 [![PDF Docs](https://img.shields.io/badge/%F0%9F%93%84_PDF-Docs-blue?style=flat&logo=adobeacrobatreader)](https://nikosavola.github.io/sphinxcontrib-bibtex-urn/sphinxcontrib-bibtex-urn.pdf)
 [![PyPI version](https://img.shields.io/pypi/v/sphinxcontrib-bibtex-urn.svg)](https://pypi.org/project/sphinxcontrib-bibtex-urn/)
