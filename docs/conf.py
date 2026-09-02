@@ -3,7 +3,7 @@
 from importlib.metadata import PackageNotFoundError, version as get_version
 
 project = "sphinxcontrib-bibtex-urn"
-copyright = "2025, Niko Savola"  # noqa: A001
+copyright = "2025, Niko Savola"  # ruff: ignore[builtin-variable-shadowing]
 author = "Niko Savola"
 try:
     release = get_version("sphinxcontrib-bibtex-urn")
