@@ -43,7 +43,7 @@ jobs:
       - name: Build LaTeX documentation
         run: just docs-latex
       - name: Compile PDF
-        uses: xu-cheng/latex-action@25080975331dc4fc8e6f1af55788e00f84f51fff # v4
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # v4
         with:
           docker_image: ghcr.io/xu-cheng/texlive-historic-alpine:2025
           root_file: sphinxcontrib-bibtex-urn.tex
