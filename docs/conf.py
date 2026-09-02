@@ -82,7 +82,7 @@ mermaid_output_format = "raw"
 # -- LaTeX -------------------------------------------------------------------
 latex_engine = "xelatex"
 latex_use_xindy = False
-latex_show_pagerefs = True
+latex_show_pagerefs = False
 latex_show_urls = "footnote"
 latex_documents = [
     (
