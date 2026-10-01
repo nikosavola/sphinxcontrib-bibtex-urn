@@ -50,7 +50,8 @@ jobs:
     if: needs.check_and_tag.outputs.new_tag_created == 'true'
     permissions:
       contents: read
-    uses: ./.github/workflows/build.yml
+    # switch to the $/ self-repository syntax once actionlint can parse it (rhysd/actionlint#711)
+    uses: ./.github/workflows/build.yml # zizmor: ignore[self-repository]
   github_release:
     name: Create GitHub Release
     needs: [check_and_tag, build]

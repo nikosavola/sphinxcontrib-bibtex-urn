@@ -17,11 +17,14 @@ jobs:
           persist-credentials: false
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
       - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+        with:
+          just-version: 1.58.0
       - uses: j178/prek-action@4e14d07f9231acabce116ccfca13b13dd9755ece # v2
   get-python-versions:
     permissions:
       contents: read
-    uses: ./.github/workflows/get-python-versions.yml
+    # switch to the $/ self-repository syntax once actionlint can parse it (rhysd/actionlint#711)
+    uses: ./.github/workflows/get-python-versions.yml # zizmor: ignore[self-repository]
   test-code:
     needs: get-python-versions
     runs-on: ${{ matrix.os }}
@@ -41,6 +44,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+        with:
+          just-version: 1.58.0
       - name: Test with pytest
         run: just test ${{ (github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest') && '--cov=sphinxcontrib_bibtex_urn --cov-report=html --cov-report=xml' || '' }}
       - name: Generate coverage badge
