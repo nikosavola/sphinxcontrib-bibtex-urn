@@ -75,7 +75,7 @@ extensions = [
     "sphinxcontrib_bibtex_urn",
 ]
 
-bibtex_default_style = "alpha"    # any pybtex style works
+bibtex_default_style = "alpha"  # any pybtex style works
 bibtex_bibfiles = ["refs.bib"]
 ```
 
@@ -88,7 +88,7 @@ extensions = [
     "sphinxcontrib.bibtex",
 ]
 
-bibtex_default_style = "urn_alpha"   # or urn_plain, urn_unsrt, urn_unsrtalpha
+bibtex_default_style = "urn_alpha"  # or urn_plain, urn_unsrt, urn_unsrtalpha
 bibtex_bibfiles = ["refs.bib"]
 ```
 
