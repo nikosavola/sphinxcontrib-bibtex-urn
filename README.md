@@ -11,6 +11,7 @@
 [![ZeroVer](https://img.shields.io/badge/versioning-0ver-orange.svg)](https://0ver.org/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnikosavola%2Fsphinxcontrib-bibtex-urn.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnikosavola%2Fsphinxcontrib-bibtex-urn?ref=badge_shield)
 
 ______________________________________________________________________
 
@@ -160,3 +161,7 @@ For information on how to set up the development environment, run tests, and con
 All participants are expected to follow the [Code of Conduct](docs/code_of_conduct.md).
 
 See the [Security Policy](docs/security.md) for information on how to report vulnerabilities.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnikosavola%2Fsphinxcontrib-bibtex-urn.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnikosavola%2Fsphinxcontrib-bibtex-urn?ref=badge_large)
