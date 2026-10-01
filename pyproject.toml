@@ -97,7 +97,7 @@ preview = true
 docstring-code-format = true
 
 [tool.ruff.lint]
-ignore = ["B008", "C901", "B905", "RUF001", "RUF003", "RUF067", "ERA001", "E501"]
+ignore = ["function-call-in-default-argument", "complex-structure", "zip-without-explicit-strict", "ambiguous-unicode-character-string", "ambiguous-unicode-character-comment", "non-empty-init-module", "commented-out-code", "line-too-long"]
 select = [
   "E",  # pycodestyle errors
   "W",  # pycodestyle warnings
@@ -139,7 +139,7 @@ select = [
 combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
-"test_*.py" = ["S101", "D102", "D103", "PLC2701", "PLR6301", "ARG002"]
+"test_*.py" = ["assert", "undocumented-public-method", "undocumented-public-function", "import-private-name", "no-self-use", "unused-method-argument"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
