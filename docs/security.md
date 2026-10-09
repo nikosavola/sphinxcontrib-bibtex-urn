@@ -22,7 +22,7 @@ To help me understand and fix the issue, please include as much information as p
 
 ### Process
 
-```{mermaid}
+```mermaid
 graph TD
     A[Vulnerability Report Received] --> B[Acknowledge Receipt]
     B --> C[Investigate & Confirm]
