@@ -21,7 +21,7 @@ jobs:
           just-version: 1.58.0
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
       - run: just docs
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: html-docs
           path: "./docs/_build/html/"
@@ -56,7 +56,7 @@ jobs:
           continue_on_error: true
           working_directory: docs/_build/latex
           extra_system_packages: ghostscript
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: pdf-docs
           path: docs/_build/latex/sphinxcontrib-bibtex-urn.pdf
