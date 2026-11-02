@@ -53,7 +53,7 @@ jobs:
         run: uv run --locked --group dev --group github genbadge coverage -i coverage.xml -o htmlcov/coverage.svg
       - name: Upload coverage report
         if: github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: coverage-report-${{ matrix.python-version }}
           path: htmlcov
